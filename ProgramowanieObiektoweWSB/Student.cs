@@ -11,6 +11,7 @@ namespace ProgramowanieObiektoweWSB
         private int rok;
         private int grupa;
         private int nrIndeksu;
+        private List<Ocena> oceny = new List<Ocena>();
 
         public int Rok 
         { 
@@ -41,6 +42,60 @@ namespace ProgramowanieObiektoweWSB
         public override void WypiszInfo()
         {
             Console.WriteLine(imie + ", " + nazwisko + ", " + dataUrodzenia + ", " + rok + ", " + grupa + ", " + nrIndeksu);
+            WypiszOceny();
+        }
+
+        public void DodajOcene(string nazwaPrzedmiotu, string data, double wartosc)
+        {
+            Ocena ocena = new Ocena(nazwaPrzedmiotu, data, wartosc);
+            oceny.Add(ocena);
+        }
+
+        public void WypiszOceny()
+        {
+            foreach (Ocena ocena in oceny)
+            {
+                ocena.WypiszInfo();
+            }
+        }
+
+        public void WypiszOceny(string nazwaPrzedmiotu)
+        {
+            foreach (Ocena ocena in oceny)
+            {
+                if (ocena.NazwaPrzedmiotu.Equals(nazwaPrzedmiotu))
+                {
+                    ocena.WypiszInfo();
+                }
+            }
+        }
+
+        public void UsunOcene(string nazwaPrzedmiotu, string data, double wartosc)
+        {
+            for (int i = 0; i < oceny.Count; i++)
+            {
+                Ocena o = oceny[i];
+                if (o.NazwaPrzedmiotu.Equals(nazwaPrzedmiotu) && o.Data.Equals(data) && o.Wartosc.Equals(wartosc))
+                {
+                    oceny.RemoveAt(i);
+                }
+            }
+        }
+
+        public void UsunOceny()
+        {
+            oceny.Clear();
+        }
+
+        public void UsunOceny(string nazwaPrzedmiotu)
+        {
+            foreach (Ocena ocena in oceny)
+            {
+                if (ocena.NazwaPrzedmiotu.Equals(nazwaPrzedmiotu))
+                {
+                    oceny.Remove(ocena);
+                }
+            }
         }
     }
 }
