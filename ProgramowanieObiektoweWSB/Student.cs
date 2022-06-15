@@ -89,12 +89,19 @@ namespace ProgramowanieObiektoweWSB
 
         public void UsunOceny(string nazwaPrzedmiotu)
         {
+            List<int> i = new List<int>();
+
             foreach (Ocena ocena in oceny)
             {
                 if (ocena.NazwaPrzedmiotu.Equals(nazwaPrzedmiotu))
                 {
-                    oceny.Remove(ocena);
+                    i.Add(oceny.IndexOf(ocena));
                 }
+            }
+
+            foreach (int j in i)
+            {
+                oceny.RemoveAt(j - 1);
             }
         }
     }
